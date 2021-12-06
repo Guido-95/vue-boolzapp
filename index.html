@@ -1,0 +1,284 @@
+<!-- Milestone 1:
+-Replica della grafica (immagine in allegato) con la possibilità di avere messaggi scritti dall’utente (verdi) e dall’interlocutore (bianco) assegnando due classi CSS diverse;
+-Visualizzazione dinamica della lista contatti: tramite la direttiva v-for, visualizzare nome e immagine di ogni contatto, ricavandoli dall'array contacts qui allegato -->
+<!-- Milestone 2
+-Visualizzazione dinamica dei messaggi: tramite la direttiva v-for, visualizzare tutti i messaggi relativi al contatto attivo all'interno del pannello della conversazione
+-Click sul contatto mostra la conversazione del contatto cliccato -->
+<!-- Milestone 3
+Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
+Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo. -->
+<!-- Milestone 4
+Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina) -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- tipo di font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- libreria js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js" integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+    <title> esercitazione app messaggistica </title>
+</head>
+<body>
+
+    <!-- sfondo pagina -->
+    <div class="sfondo1">
+        <div class="sfondo2">
+        
+        </div>
+    </div>
+    <!-- sfondo pagina -->
+<<<<<<< HEAD
+	
+=======
+
+>>>>>>> parent of eea0de9 (prova)
+    <!-- contenitore -->
+    <div class="wrapper">
+       
+        <!-- root vue -->
+        <div id="root">
+            <!-- div lato sinistro -->
+            <div id="div-sinistra">
+                <!-- nome utente con immagine -->
+                <div class="nome_utente" :class = "tema == true ? 'tema-alternativo' : ''">
+                    <div class="img_nome">
+                        <img src="img/avatar_io.jpg" alt="avatar utente"> 
+                        <span> 
+                            Guido 
+                        </span>
+                    </div>
+                    <!-- icone lato sinistro -->
+                    <div class="icone">
+                        <i class="fas fa-adjust" @click = "[cambioTema(), cambioTemaMessaggi() ]" ></i>
+                        <i class="fas fa-circle-notch"></i>
+                        <i class="fas fa-comment-alt"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                    <!-- icone lato sinistro -->   
+                </div>
+                <!-- nome utente con immagine -->
+
+                <!-- notifiche -->
+                <div class="notifiche" :class = "tema == true ? 'notifiche-sfondo-2' : 'notifiche-sfondo'">
+                    <i class="fas fa-bell-slash" v-if ="notificheAttive == false" @click = "notifiche"></i>
+                    <i class="fas fa-bell" @click = "notifiche" v-else ></i>
+                    <div class="notifiche_messaggi">
+                        <div>
+                            Ricevi notifiche di nuovi messaggi 
+                        </div>
+                        <span class="sottolineatura grigio" @click = "notifiche" v-if ="notificheAttive == false">
+                            Attiva notifiche desktop
+                        </span>
+
+                        <span class="sottolineatura grigio" @click = "notifiche" v-else>
+                            Disattiva le notifiche desktop
+                        </span>
+                    
+                    </div>
+                </div>
+                <!-- /notifiche -->
+                <div class="input-sinistra" :class = "tema == true ? 'tema-alternativo' : 'bianco'">
+                    <input type="text" v-model= "filtro" placeholder="Cerca o inizia una nuova chat" 
+                    @keyup = "filtraContatti()" :class = "tema == true ? 'tema-alternativo' : ''" >
+                    <i class="fas fa-search icona-cerca-sinistra"></i>
+                </div>
+
+                <!-- lista contatti -->
+                <div class="contatti" :class = "[tema == true ? 'tema-alternativo' : 'bianco', tema == true ? 'contatti-2' : '']" >
+                    <!-- cicla sull'array contatti -->
+                    <div class="contatto " v-for="contatto,contatore in contacts" @click="contattoCorrente = contatore" 
+                    :class=" [contattoCorrente == contatore ? 'attivo' : '', contacts[contatore].visible ? '' : 'display-none', contattoAttivoTemaAlternativo(contatore) ? 'attivo-2' : '']">
+                    <!-- /cicla sull'array contatti -->
+                        <!-- percorso viene composto dal metodo immagineAvatar -->
+                        <img :src="immagineAvatar(contatore)" :alt="contacts[contatore].name">
+                        <!-- percorso viene composto dal metodo immagineAvatar -->
+
+                        <!-- informazioni contatto -->
+                        <div class="info_contatto"  >
+                            
+                            {{contatto.name}}
+
+                            <!-- mostra messaggi se ci sono -->
+                            <span class="grigio-2" v-if="contatto.messages.length > 0"> 
+                                {{ contatto.messages[contatto.messages.length - 1].text.substr(0,30) + "..." }} 
+                            </span>
+                            
+                        </div>
+                        <!-- mostra messaggi se ci sono -->
+                        <div class="info grigio-2" v-if="contatto.messages.length > 0">
+                            {{ contatto.messages[contatto.messages.length - 1].date }} 
+                        </div> 
+
+                        <!-- /informazioni contatto -->  
+                    </div>
+                </div>
+                <!-- /lista contatti -->
+                
+            </div>
+            <!-- /div lato sinistro -->
+
+            <!-- div lato destro -->
+            <div id="right">
+                <!-- intestazione della conversazione -->
+                <div class="intestazione" :class = "tema == true ? 'tema-alternativo' : 'intestazione-1'">
+                    <!-- informazioni contatto della conversazione -->
+                    <div class="img_nome">
+                        <!-- immagine dinamica -->
+                        <img :src="immagineAvatar(contattoCorrente)" alt="avatar utente">
+                        <!-- /immagine dinamica -->
+
+                        
+                        <div class="notifiche_messaggi">
+                            <!-- nome contatto della conversazione -->
+                            <div>
+                                {{contacts[contattoCorrente].name}}
+                            </div>
+                            <!-- /nome contatto della conversazione -->
+                            
+                            <!-- quando l'ultimo messaggio è inviato e c'è almeno 1 messaggio c'è la scritta sta scrivendo per il tema 1 -->
+                            <span class="verde" v-if = " contacts[contattoCorrente].messages.length > 0  && contacts[contattoCorrente].messages[contacts[contattoCorrente].messages.length - 1].status == 'sent'">
+                                Sta scrivendo..
+                            </span>
+                            <!-- /quando l'ultimo messaggio è inviato e c'è almeno 1 messaggio c'è la scritta sta scrivendo per il tema 1 -->
+
+                            <!-- ultimo accesso tema 1 -->
+                            <span class="grigio" :class = " tema == false ? 'display-block' : 'display-none'" v-else>
+                                Ultimo accesso {{ controllaUltimoAccesso(contattoCorrente) }}
+                            </span>
+                            <!-- /ultimo accesso tema 1 -->
+                        
+
+                            <!-- quando l'ultimo messaggio è inviato e c'è almeno 1 messaggio c'è la scritta sta scrivendo per il tema 2 -->
+                            <span class="verde" v-if = "contacts[contattoCorrente].messages.length > 0  && contacts[contattoCorrente].messages[contacts[contattoCorrente].messages.length - 1].status == 'sent-2'  " >
+                                Sta scrivendo..
+                            </span>
+                            <!-- quando l'ultimo messaggio è inviato e c'è almeno 1 messaggio c'è la scritta sta scrivendo per il tema 2 -->
+
+                            <!-- ultimo accesso tema 2 -->
+                            <span class="grigio" :class = " tema == true ? 'display-block' : 'display-none' " v-else>
+                                Ultimo accesso {{ controllaUltimoAccesso(contattoCorrente) }}
+                            </span>
+                            <!-- ultimo accesso tema 2 -->
+                        
+                        </div>
+                    </div>
+                    <!-- /informazioni contatto della conversazione -->
+
+                    <!-- icone intestazione della conversazione -->
+                    <div class="icone">
+                        <i class="fas fa-search"></i>
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                    <!-- /icone intestazione della conversazione -->
+
+                </div>
+                <!-- /intestazione della conversazione -->
+
+                <!-- div messaggi -->
+                <div class="messaggi"  :class = "[tema == true ? 'sfondo-messaggi-alternativo' : 'sfondo-messaggi-principale', tema == true ? 'messaggi-2' : 'sfondo-messaggi-principale']">
+                    <!-- div con sfondo immagine-->
+                    <div class="colonna">
+                        <div class="nuova-conversazione" v-if="contacts[contattoCorrente].messages.length == 0">
+                            
+                            Scrivi un messagio per cominciare una nuova conversazione
+                          
+                        </div>
+                        <!-- row dove vanno i singoli messaggi in base allo status -->
+                        <div class="row"  v-for="messaggio,contatore in contacts[contattoCorrente].messages" 
+                        :class="[contacts[contattoCorrente].messages[contatore].status == 'sent' ? 'flex-end '  : '',
+                                contacts[contattoCorrente].messages[contatore].status == 'sent-2' ? 'flex-end '  : '']">
+
+                            <!-- singolo messaggio con classe dinamica in base al tema -->
+                            <div class="messaggio" :class="
+                            
+                            [contacts[contattoCorrente].messages[contatore].status == 'sent' ? 'sent' : '',
+                            contacts[contattoCorrente].messages[contatore].status == 'received' ? 'received' : '',
+                            
+                            contacts[contattoCorrente].messages[contatore].status == 'sent-2' ? 'sent-2' : '',
+                            contacts[contattoCorrente].messages[contatore].status == 'received-2' ? 'received-2' : '',
+
+                            tema == true ? 'font-bianco' : ''] ">
+                            <!-- freccia sul messaggio che cliccata apre un pannello con le opzioni -->
+                            <i class="fas fa-chevron-down" @click = "">
+                                <div class="info-aggiuntive" :class= "tema == true ? 'font-nero' : ''">
+                                    <div class="testo-info">Message Info</div>
+                                    <div class="testo-info" @click = "rimuoviMessaggio(contatore)">
+                                        Delete Message
+                                    </div>
+                                </div>
+                            </i>
+                            <!-- /freccia sul messaggio che cliccata apre un pannello con le opzioni -->
+
+                                <!-- testo del messaggio -->
+                                <div class="testo" v-if="contacts[contattoCorrente].messages.length > 0">
+                                    {{messaggio.text}}
+                                </div>
+                                <!-- /testo del messaggio -->
+                                
+                                <!-- informazioni messaggio -->
+                                <div class="info-messaggio grigio" :class="tema == true ? 'font-bianco-2' : ''" v-if="contacts[contattoCorrente].messages.length > 0">
+                                    {{messaggio.date}}
+                                </div>
+                                <!-- /informazioni messaggio -->
+                            </div>
+                            <!-- /singolo messaggio con classe dinamica in base al tema -->
+
+                        </div>
+                        <!-- /row dove vanno i singoli messaggi in base allo status -->
+
+                    </div>
+                    <!-- /div con sfondo immagine-->
+
+                    
+                   
+                </div>
+                <!-- /div messaggi -->
+                <!-- div con emote, input invio messaggio e microfono -->
+                <div class="invio">
+                    <div class="emote" :class = "tema == true ? 'tema-alternativo' : 'bianco'">
+                        <i class="far fa-smile" @click="emote"></i>
+                        <div class="emote-toggle" :class="[emoteToggle == true ? 'display-block' : 'display-none', tema == true ? 'emote-2' :'emote-1']">
+                            <span @click="scriviEmote(contatore)" v-for="elemento,contatore in listaEmote" > 
+
+                                {{ listaEmote[contatore] }}
+                                
+                            </span>
+                        </div>
+                    </div>
+                    <div class="input-invio" :class = "tema == true ? 'tema-alternativo' : 'bianco'">
+                        <input type="text" :class = "tema == true ? 'tema-alternativo' : 'bianco'" v-model= "inputMessaggio" placeholder="Scrivi un messaggio.."
+                        @keydown.enter="scriviMessaggio(contattoCorrente)"
+                        @focus = "togliEmote">
+                    </div>
+                    <div class="microfono" :class = "tema == true ? 'tema-alternativo' : 'bianco'">
+
+                        <i class="fas fa-microphone" @mousedown = " toggleMicrofono " :class="microfono == true ? 'display-none' :'display-block'"></i>
+                        
+                        <i class="fas fa-circle" @mouseup = " toggleMicrofono " :class="microfono == false ? 'display-none' :'display-block'"></i>
+                    </div>
+                </div>
+                <!-- /div con emote, input invio messaggio e microfono -->
+            </div>
+            <!-- /div lato destro -->
+        </div>
+        <!-- /root vue -->
+    </div>
+    <!-- /contenitore -->
+
+    <script type="text/javascript" src="js/script.js"></script>
+
+</body>
+</html>

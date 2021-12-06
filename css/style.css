@@ -1,0 +1,551 @@
+/* impostazioni di reset */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* tag generici */
+body {
+    /* background-image: url("../img/img/sfondo.jpg"); */
+    
+    font-family: 'Roboto', sans-serif;
+      
+}
+
+img {
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 55px;
+}
+
+input {
+    border-radius: 5px;
+    border: none;
+    height: 80%;
+    padding-left: 50px;
+    outline: none;
+    border: 1px solid #eaf0f6;
+    width: calc(100% - 20px);
+}
+
+/* stili */
+.sottolineatura {
+    font-size: 15px;
+    text-decoration: underline; 
+}
+
+.grigio {
+    color: grey;
+
+}
+
+.grigio-2 {
+    margin-top: 2px;
+    font-size: 12px;
+    color: rgb(151, 156, 167);
+}
+
+.font-bianco {
+    color: white;
+}
+
+.font-bianco-2 {
+    opacity: 70%;
+    color: white;
+}
+
+.font-nero {
+    color: black;
+}
+
+.verde {
+    color: green;
+}
+
+.bianco {
+    background-color: white;
+}
+
+.sent {
+    background-color: #d5f9ba;
+ }
+
+ .sent-2 {
+    background-color:#2b5278;
+ }
+ 
+ .received {
+     background-color: white;
+ }
+
+ .received-2 {
+    background-color: #182533;
+}
+ 
+.attivo {
+    background-color: #e9ebeb;
+}
+
+.attivo-2 {
+    background-color: #2b5278;
+}
+
+.sfondo {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* contenitori, sfondi */
+.sfondo1 {
+    z-index: -1;
+    position: absolute;
+    height: 15vh;
+    width: 100%;
+    background-color: #009688;
+}
+
+.sfondo2 {
+    z-index: -1;
+    position: absolute;
+    top: 141px;
+    height: 85vh;
+    width: 100%;
+    
+    background-color: #d8dbd6;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    
+}
+
+
+/* root vue */
+#root {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+
+
+
+
+/* div lato sinistro */
+#div-sinistra {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+/* div lato destro */
+#right {
+    display: flex;
+    flex-direction: column;
+    width: 65%; 
+}
+
+
+.nome_utente {
+    display: flex; 
+    height: 7%;
+    border-right: 1px solid lightgrey;
+    background-color: #eaeaea;
+}
+
+.tema-alternativo {
+    color: white;
+    background-color:#17212b;
+}
+
+.img_nome {
+    display: flex;
+    align-items: center;
+    width: 50%; 
+}
+
+.icone {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50%;
+    padding-right: 20px;
+}
+.icone i {
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+    color: #b1b1b1;
+}
+
+.icone i:hover {
+    color: #686868;
+}
+
+.notifiche {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    padding-left: 20px;
+    background-color: #8edafc;
+}
+
+.notifiche-sfondo {
+   
+    background-color: #8edafc;
+}
+
+
+
+
+.notifiche-sfondo-2 {
+    background-color: #6eb1cf;
+}
+
+.notifiche span {
+    cursor: pointer;
+}
+
+/* icona notifiche */
+.fa-bell-slash {
+    border-radius:50%;
+    padding: 15px 12px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #8edafc;
+    background-color: white;
+}
+
+.fa-bell {
+    border-radius:50%;
+    padding: 15px 16px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #8edafc;
+    background-color: white;
+}
+
+/* /icona notifiche */
+
+.notifiche_messaggi {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.input-sinistra {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+.icona-cerca-sinistra {
+    position: absolute;
+    color:#71767e;
+    top: 50%;
+    left: 25px;
+    transform: translate(0, -50%);
+}
+
+.contatti {
+    overflow-y:scroll;
+    height: 78%;
+
+}
+
+.contatti-2 {
+    overflow-y:scroll;
+    height: 78%;
+
+}
+
+
+.contatti-2::-webkit-scrollbar {
+    width: 17px;
+    background: rgb(180, 180, 180);
+}
+
+.contatti-2::-webkit-scrollbar-thumb {
+  
+    background: rgb(78, 78, 78);  
+    
+}
+
+
+.contatto {
+    display: flex;
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid lightgray;
+
+}
+
+.info_contatto {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    width: 50%;
+}
+
+.info_contatto .grigio,
+.info.grigio2,
+.info-messaggio.grigio2 {
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.info {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;  
+}
+
+.intestazione {
+    display: flex; 
+    height: 7%;
+    
+    
+    
+}
+
+.intestazione-1 {
+    background-color: #eaeaea;
+}
+
+.intestazione .grigio {
+    margin-top: 2px;
+    font-size: 13px;
+}
+
+.messaggi {
+    
+    display: flex;
+    overflow-y:scroll;
+    height: calc(100% - 14%);
+    
+}
+
+.messaggi-2 {
+    display: flex;
+    overflow-y:scroll;
+    height: calc(100% - 14%);
+}
+
+
+.messaggi-2::-webkit-scrollbar {
+    width: 17px;
+    background: rgb(180, 180, 180);
+}
+
+.messaggi-2::-webkit-scrollbar-thumb {
+  
+    background: rgb(78, 78, 78);  
+    
+}
+
+.sfondo-messaggi-principale {
+    background-image: url(../img/mine.jpg);
+}
+
+
+.sfondo-messaggi-alternativo {
+    background-color: #0e1621;
+}
+
+.colonna {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height: 100%;
+    padding: 50px 80px 50px 50px;
+    
+}
+
+.flex-end{
+    justify-content: flex-end;
+}
+
+.flex-start {
+    align-items: flex-start;
+}
+
+.invio {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    height: 7%;
+    background-color: #f3eeea;
+}
+
+.emote {
+    position: relative;
+}
+
+
+.emote,
+.microfono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 10%;
+    height: 100%;
+    font-size: 30px;
+    color: #71767e;
+}
+
+.fa-circle{
+    font-size: 15px;
+    color: red;
+}
+
+.fa-smile:hover{
+    color: #303438;
+}
+
+.input-invio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: 80%;
+    height: 100%;
+}
+.input-invio input {
+    padding-left: 10px;
+    width: 100%;
+    height: 80%; 
+    font-size: 20px;
+}
+
+.tema-input {
+    background-color: #242f3d;
+}
+
+.row {
+    display: flex;
+    margin: 10px;
+    font-size: 15px; 
+}
+
+.messaggio {
+    position: relative;
+    border-radius: 10px;
+    font-size: 17px;
+    width: 250px;
+    padding: 10px 20px 10px 10px;
+}
+
+.fa-chevron-down {
+    position: absolute;
+    z-index: 1000;
+    right: 5%;
+    top: 30%;
+    display: none;
+    cursor: pointer;
+    transform: translateX(-50%);
+}
+
+.messaggio:hover .fa-chevron-down {
+    display: block;
+}
+
+.fa-chevron-down:hover .info-aggiuntive {
+    display: block;
+}
+
+.info-aggiuntive {
+    width: 200px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    display: none;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.testo-info {
+    padding: 20px;
+    font-weight: 300;
+    
+    font-family: 'Roboto', sans-serif;
+}
+
+.testo {
+    margin: 2px;  
+}
+
+.blue {
+    background-color: blue;
+}
+
+.info-messaggio {
+   text-align: right;
+   margin-top: 10px;
+   font-size: 10px;
+}
+
+.padding-top {
+    padding-top: 220px;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+
+.emote-toggle {
+    position: absolute;
+    top: -135px;
+    left: 0px;
+    width: 300px;
+    height: 135px;
+    overflow: auto;
+}
+
+.emote-1 {
+    background-color: white;
+}
+
+.emote-2 {
+    background-color:#17212b;  
+}
+
+.emote-toggle::-webkit-scrollbar {
+    width: 8px;
+}
+
+.emote-toggle::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgb(143, 143, 143);  
+    
+}
+
+.nuova-conversazione {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    background-color: rgba(5, 5, 5, 0.8);
+}
+
+
+
+
