@@ -545,7 +545,10 @@ input {
     padding: 10px;
     background-color: rgba(5, 5, 5, 0.8);
 }
+.avviso{
+    display: none;
 
+  }
 @media screen and (max-width: 1000px) {
     .wrapper,.sfondo1{
       display: none;
